@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-navy-950: #061022;
+  --color-navy-900: #0B1B36;
+  --color-navy-800: #13294E;
+  --color-navy-700: #1E3A68;
+  --color-gold-600: #9E7216;
+  --color-gold-500: #B8860B;
+  --color-gold-400: #C99B2E;
+  --color-gold-300: #DFB85A;
+  --color-gold-50: #FBF7EC;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    color: #0F172A;
+    background-color: #F8FAFC;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid #C99B2E;
+    outline-offset: 2px;
+  }
+}
+
+/* Continuous right-to-left brand partner ticker (compositor-only transform) */
+@keyframes trinetra-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.brand-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: trinetra-marquee 34s linear infinite;
+}
+
+.brand-marquee-viewport:hover .brand-marquee-track,
+.brand-marquee-viewport:focus-within .brand-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .brand-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Dedicated A4 print mode when printing TRINETRA CCTV Package Quotations */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  body.printing-quotation * {
+    visibility: hidden;
+  }
+
+  body.printing-quotation #trinetra-a4-quotation,
+  body.printing-quotation #trinetra-a4-quotation * {
+    visibility: visible;
+  }
+
+  body.printing-quotation #trinetra-a4-quotation {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
